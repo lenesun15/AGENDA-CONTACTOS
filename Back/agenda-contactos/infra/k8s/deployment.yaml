@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contacts-service
+  labels:
+    app: contacts-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: contacts-service
+  template:
+    metadata:
+      labels:
+        app: contacts-service
+    spec:
+      containers:
+      - name: contacts-service
+        image: your-docker-repo/contacts-service:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DATABASE_URL
+          value: "postgres://user:password@postgres:5432/contacts_db"
+        - name: NODE_ENV
+          value: "production"

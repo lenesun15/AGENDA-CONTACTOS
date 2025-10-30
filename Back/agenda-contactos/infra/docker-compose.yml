@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api-gateway
+
+  api-gateway:
+    build:
+      context: ./services/api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - contacts-service
+      - auth-service
+      - notifications-service
+      - search-service
+
+  contacts-service:
+    build:
+      context: ./services/contacts-service
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgres://user:password@database/postgres
+
+  auth-service:
+    build:
+      context: ./services/auth-service
+    ports:
+      - "5001:5001"
+
+  notifications-service:
+    build:
+      context: ./services/notifications-service
+    ports:
+      - "5002:5002"
+
+  search-service:
+    build:
+      context: ./services/search-service
+    ports:
+      - "5003:5003"
+
+  database:
+    image: postgres:latest
+    volumes:
+      - ./database/postgres/init:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"

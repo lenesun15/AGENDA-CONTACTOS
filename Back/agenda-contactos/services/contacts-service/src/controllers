@@ -1,0 +1,68 @@
+// Este archivo contiene los controladores que manejan la lógica de negocio para los contactos.
+
+import { Request, Response } from 'express';
+import { ContactRepository } from '../repositories/contact-repository';
+
+const contactRepository = new ContactRepository();
+
+export const getContacts = async (req: Request, res: Response) => {
+    try {
+        const contacts = await contactRepository.getAll();
+        res.status(200).json(contacts);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving contacts', error });
+    }
+};
+
+export const getContactById = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const contact = await contactRepository.getById(id);
+        if (contact) {
+            res.status(200).json(contact);
+        } else {
+            res.status(404).json({ message: 'Contact not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving contact', error });
+    }
+};
+
+export const createContact = async (req: Request, res: Response) => {
+    const newContact = req.body;
+    try {
+        const createdContact = await contactRepository.create(newContact);
+        res.status(201).json(createdContact);
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating contact', error });
+    }
+};
+
+export const updateContact = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const updatedContact = req.body;
+    try {
+        const contact = await contactRepository.update(id, updatedContact);
+        if (contact) {
+            res.status(200).json(contact);
+        } else {
+            res.status(404).json({ message: 'Contact not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating contact', error });
+    }
+};
+
+export const deleteContact = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const deleted = await contactRepository.delete(id);
+        if (deleted) {
+            res.status(204).send();
+        } else {
+            res.status(404).json({ message: 'Contact not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting contact', error });
+    }
+};

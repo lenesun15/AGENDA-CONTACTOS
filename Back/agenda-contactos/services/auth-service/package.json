@@ -1,0 +1,33 @@
+{
+  "name": "auth-service",
+  "version": "1.0.0",
+  "description": "Service for handling authentication in the contact agenda application.",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "bcryptjs": "^2.4.3",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.0",
+    "ts-node": "^9.0.0",
+    "jest": "^26.0.0",
+    "@types/jest": "^26.0.0",
+    "@types/express": "^4.17.0",
+    "@types/bcryptjs": "^2.4.2"
+  },
+  "keywords": [
+    "authentication",
+    "service",
+    "contacts"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

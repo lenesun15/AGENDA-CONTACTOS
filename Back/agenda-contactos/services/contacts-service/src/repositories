@@ -1,0 +1,29 @@
+// Este archivo contiene la implementación de los repositorios para interactuar con la base de datos de contactos. 
+// Aquí se pueden definir funciones para crear, leer, actualizar y eliminar contactos.
+
+import { Contact } from '../models/contact.model';
+import { db } from '../database'; // Asumiendo que hay un archivo de configuración de base de datos
+
+export const getAllContacts = async (): Promise<Contact[]> => {
+    return await db('contacts').select('*');
+};
+
+export const getContactById = async (id: string): Promise<Contact | null> => {
+    const contact = await db('contacts').where({ id }).first();
+    return contact || null;
+};
+
+export const createContact = async (contactData: Contact): Promise<Contact> => {
+    const [newContact] = await db('contacts').insert(contactData).returning('*');
+    return newContact;
+};
+
+export const updateContact = async (id: string, contactData: Partial<Contact>): Promise<Contact | null> => {
+    const [updatedContact] = await db('contacts').where({ id }).update(contactData).returning('*');
+    return updatedContact || null;
+};
+
+export const deleteContact = async (id: string): Promise<boolean> => {
+    const result = await db('contacts').where({ id }).del();
+    return result > 0;
+};

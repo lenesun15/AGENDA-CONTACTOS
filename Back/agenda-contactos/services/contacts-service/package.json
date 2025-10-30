@@ -1,0 +1,32 @@
+{
+  "name": "contacts-service",
+  "version": "1.0.0",
+  "description": "Service for managing contacts in the agenda application.",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "typeorm": "^0.2.34",
+    "pg": "^8.5.1",
+    "class-validator": "^0.13.1",
+    "class-transformer": "^0.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.2",
+    "ts-node": "^9.1.1",
+    "jest": "^26.6.3",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^14.14.31"
+  },
+  "keywords": [
+    "contacts",
+    "service",
+    "agenda"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

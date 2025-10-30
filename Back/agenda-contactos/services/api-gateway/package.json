@@ -1,0 +1,25 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "description": "API Gateway for the Contact Agenda application",
+  "main": "src/gateway.ts",
+  "scripts": {
+    "start": "ts-node src/gateway.ts",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "axios": "^0.21.1",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.2",
+    "ts-node": "^9.1.1",
+    "jest": "^26.6.3",
+    "@types/jest": "^26.0.0",
+    "@types/node": "^14.14.31",
+    "@types/express": "^4.17.8"
+  },
+  "license": "MIT"
+}
